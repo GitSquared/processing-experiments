@@ -37,28 +37,35 @@ public class Terrain {
     strokeWeight(pointSize);
 
     for (int y = 0; y < pointRows.length; y++) {
-      noFill();
-      stroke(128,128,128);
-      if (y == pointRows.length - 1) {
-        // last row, end of terrain away from camera
-        // draw an actual wall corresponding to the terrain
-        // so that it can hide the sun
-        noStroke();
-        fill(0);
-        beginShape();
-        vertex(0, (y * densityMargin) + rowsYOffset, 0);
-        for (int x = 0; x < pointRows[y].length; x++) {
-          float z = pointRows[y][x];
-          vertex(x * densityMargin, (y * densityMargin) + rowsYOffset, z);
-        }
-        vertex(pointRows[y].length * densityMargin, (y * densityMargin) + rowsYOffset, 0);
-        endShape(CLOSE);
-        continue;
-      }
+      // background terrain shape
+      fill(0);
+      stroke(#3d4b4c);
+      beginShape();
+      vertex(0, (y * densityMargin) + rowsYOffset, 0);
 
       for (int x = 0; x < pointRows[y].length; x++) {
         float z = pointRows[y][x];
-        point(x * densityMargin, (y * densityMargin) + rowsYOffset, z);
+        vertex(x * densityMargin, (y * densityMargin) + rowsYOffset, z);
+      }
+
+      vertex(pointRows[y].length * densityMargin, (y * densityMargin) + rowsYOffset, 0);
+      endShape(CLOSE);
+
+      // surface matrix
+      noFill();
+      for (int x = 0; x < pointRows[y].length; x++) {
+        float z = pointRows[y][x];
+        if (x % 5 == 0 && y % 5 == 0) {
+          // 5x5 sea-level grid
+          stroke(#677e7f);
+          point(x * densityMargin, (y * densityMargin) + rowsYOffset, -96);
+        };
+
+        if (x % 20 == 0 || y % 20 == 0) {
+          // 15x15 terrain surface grid
+          stroke(170,207,209);
+          point(x * densityMargin, (y * densityMargin) + rowsYOffset, z - 3);
+        }
       }
     }
   }
