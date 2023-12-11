@@ -15,8 +15,8 @@ void updateCamera() {
 void setup() {
   size(602, 399, P3D);
   // fullScreen(P3D);
-
   frameRate(60);
+
   int cols = 180;
   int rows = 90;
 

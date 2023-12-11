@@ -15,7 +15,7 @@ public class Sea {
 
   public void draw() {
     noStroke();
-    fill(0, 0, 0);
+    fill(0xda000000);
 
     beginShape();
     vertex(0, 0, seaLevel);
