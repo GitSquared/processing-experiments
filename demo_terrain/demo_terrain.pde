@@ -1,5 +1,6 @@
 Terrain terrain;
 Sea sea;
+Sun sun;
 
 int cameraX;
 int cameraY;
@@ -26,7 +27,8 @@ void setup() {
   updateCamera();
 
   terrain = new Terrain(cols, rows);
-  sea = new Sea(1200, 800, -95);
+  sea = new Sea(1200, 630, -95);
+  sun = new Sun(cameraX, 600, -95);
 }
 
 void draw() {
@@ -37,7 +39,5 @@ void draw() {
 
   sea.draw();
 
-  translate(cameraX, cameraY+270, -128);
-  stroke(200,200,200);
-  // sphere(60);
+  sun.draw();
 }
